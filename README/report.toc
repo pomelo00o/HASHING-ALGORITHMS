@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}Hash Chaining}{3}
+\contentsline {subsection}{\numberline {1.1}Construction}{3}
+\contentsline {subsubsection}{\numberline {1.1.1}Linked List Construction}{3}
+\contentsline {subsubsection}{\numberline {1.1.2}Linked List Search}{3}
+\contentsline {subsubsection}{\numberline {1.1.3}Linked List Insert}{3}
+\contentsline {subsubsection}{\numberline {1.1.4}Linked List Remove}{4}
+\contentsline {subsubsection}{\numberline {1.1.5}Structures of Hash Chaining}{4}
+\contentsline {subsection}{\numberline {1.2}Supported Functions}{4}
+\contentsline {subsubsection}{\numberline {1.2.1}Search}{4}
+\contentsline {subsubsection}{\numberline {1.2.2}Insert}{5}
+\contentsline {subsubsection}{\numberline {1.2.3}Remove}{5}
+\contentsline {subsubsection}{\numberline {1.2.4}Rehash}{5}
+\contentsline {subsection}{\numberline {1.3}Theoretical Analysis}{6}
+\contentsline {subsection}{\numberline {1.4}Test Cases}{6}
+\contentsline {subsubsection}{\numberline {1.4.1}Correctness Test}{6}
+\contentsline {subsubsection}{\numberline {1.4.2}Efficiency Test}{6}
+\contentsline {section}{\numberline {2}Cuckoo Hashing}{8}
+\contentsline {subsection}{\numberline {2.1}Construction}{8}
+\contentsline {subsubsection}{\numberline {2.1.1}Structures of Cuckoo Hashing}{8}
+\contentsline {subsection}{\numberline {2.2}Supported Functions}{8}
+\contentsline {subsubsection}{\numberline {2.2.1}Search}{8}
+\contentsline {subsubsection}{\numberline {2.2.2}Insert}{9}
+\contentsline {subsubsection}{\numberline {2.2.3}Remove}{9}
+\contentsline {subsubsection}{\numberline {2.2.4}Rehash}{9}
+\contentsline {subsection}{\numberline {2.3}Theoretical Analysis}{10}
+\contentsline {subsection}{\numberline {2.4}Test Cases}{10}
+\contentsline {subsubsection}{\numberline {2.4.1}Correctness Test}{10}
+\contentsline {subsubsection}{\numberline {2.4.2}Efficiency Test}{10}
+\contentsline {section}{\numberline {3}Comparative Analysis}{12}
