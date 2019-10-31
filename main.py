@@ -3,6 +3,8 @@ from cuckoo import *
 from random import *
 from time import *
 
+hashmap = "chain"
+
 class Command(object):
     def __init__(self, action, key, val):
         self.action = action
@@ -11,7 +13,7 @@ class Command(object):
 
 
 def generate_testcase(n):
-    filename = './testcase/insert/chain/test_' + str(n) + '.csv'
+    filename = './testcase/insert/' + hashmap + '/test_' + str(n) + '.csv'
     for i in range(0, n):
         c = Command('i', floor(random() * 100), floor(random() * 100))
         with open(filename, 'a') as f:
@@ -22,8 +24,10 @@ def generate_testcase(n):
 
 
 if __name__ == '__main__':
-    outfile = './output/insert/cuckoo.csv'
-    N = 373 * 2
+    outfile = './output/insert/' + hashmap + '.csv'
+    N = 373
+    if hashmap == 'cuckoo':
+        N *= 2
     alpha = 0.05
     while alpha < 1:
         n = floor(alpha * N)
@@ -31,7 +35,7 @@ if __name__ == '__main__':
             alpha += 0.05
             continue
         # generate_testcase(n)
-        filename = './testcase/insert/cuckoo/test_' + str(n) + '.csv'
+        filename = './testcase/insert/' + hashmap + '/test_' + str(n) + '.csv'
         start = time()
         c = Chaining()
         with open(filename, 'r') as f:
