@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4f758de-40de-4d82-ad43-b34e30bbac54" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/draw.py" beforeDir="false" afterPath="$PROJECT_DIR$/output/draw.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/fig/insert.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output/fig/insert.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/fig/insert_chain.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output/fig/insert_chain.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/fig/insert_cuckoo.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output/fig/insert_cuckoo.eps" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,8 +35,8 @@
       <file leaf-file-name="draw.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/output/draw.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
-              <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
+            <state relative-caret-position="577">
+              <caret line="57" column="11" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -114,17 +110,6 @@
             <path>
               <item name="HASHING-ALGORITHM" type="b2602c69:ProjectViewProjectNode" />
               <item name="HASHING-ALGORITHM" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HASHING-ALGORITHM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HASHING-ALGORITHM" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HASHING-ALGORITHM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HASHING-ALGORITHM" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="fig" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -270,14 +255,14 @@
       <window_info anchor="bottom" id="TODO" order="12" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.2820774" />
+      <window_info anchor="bottom" id="Run" order="8" weight="0.2820774" />
       <window_info anchor="bottom" id="Version Control" order="1" />
       <window_info anchor="bottom" id="Python Console" order="3" weight="0.24032587" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.26782078" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.26782078" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.15228967" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="2" />
-      <window_info active="true" anchor="right" id="SciView" order="0" visible="true" weight="0.4430245" />
+      <window_info anchor="right" id="SciView" order="0" visible="true" weight="0.4430245" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.39918533" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -494,8 +479,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/output/draw.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
+        <state relative-caret-position="577">
+          <caret line="57" column="11" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
