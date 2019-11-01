@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.2.28)  31 OCT 2019 03:47
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.2.28)  31 OCT 2019 21:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/jixingyou/Desktop/HASHING/README/report
-(/Users/jixingyou/Desktop/HASHING/README/report.tex
+**/Users/jixingyou/Desktop/HASHING-ALGORITHM/README/report
+(/Users/jixingyou/Desktop/HASHING-ALGORITHM/README/report.tex
 LaTeX2e <2018-04-01> patch level 2
 Babel <3.18> and hyphenation patterns for 22 language(s) loaded.
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
@@ -174,11 +174,7 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (/usr/local/texlive/2018basic/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-) (./report.aux
-
-LaTeX Warning: Label `insert' multiply defined.
-
-)
+) (./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
@@ -237,41 +233,29 @@ LaTeX Font Info:    ... okay on input line 58.
 \tf@toc=\write3
 \openout3 = `report.toc'.
 
- [2] [3] [4] [5]
+ [2] [3] [4] [5] [6]
 File: ../output/fig/insert_original_chain.eps Graphic file (type eps)
 <../output/fig/insert_original_chain.eps>
+ [7]
 File: ../output/fig/insert_chain.eps Graphic file (type eps)
 <../output/fig/insert_chain.eps>
- [6]
-
-LaTeX Warning: Text page 7 contains only floats.
-
-[7] [8] [9]
+ [8] [9] [10]
 File: ../output/fig/insert_original_cuckoo.eps Graphic file (type eps)
 <../output/fig/insert_original_cuckoo.eps>
 File: ../output/fig/insert_cuckoo.eps Graphic file (type eps)
 <../output/fig/insert_cuckoo.eps>
- [10]
+ [11] [12] (./report.aux)
 
-LaTeX Warning: Text page 11 contains only floats.
-
-[11]
-File: ../output/fig/insert_original.eps Graphic file (type eps)
-<../output/fig/insert_original.eps>
-File: ../output/fig/insert.eps Graphic file (type eps)
-<../output/fig/insert.eps>
- [12] [13] (./report.aux)
-
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 3724 strings out of 494476
- 50980 string characters out of 6165662
- 304462 words of memory out of 5000000
- 7597 multiletter control sequences out of 15000+600000
+ 3717 strings out of 494476
+ 50827 string characters out of 6165662
+ 362462 words of memory out of 5000000
+ 7591 multiletter control sequences out of 15000+600000
  6463 words of font info for 36 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 27i,10n,49p,406b,991s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,10n,49p,477b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (13 pages).
+Output written on report.pdf (12 pages).

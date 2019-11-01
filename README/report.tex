@@ -12,7 +12,7 @@
 
 \lstset{%
 alsolanguage=Python,
-%language={[ISO]Python},       %language为，还有{[Visual]Python}
+% language={[Visual]Python},       %language为，还有{[Visual]Python}
 %alsolanguage=[ANSI]C,      %可以添加很多个alsolanguage,如alsolanguage=matlab,alsolanguage=VHDL等
 %alsolanguage= tcl,
 alsolanguage= XML,
@@ -187,6 +187,14 @@ class Chaining(object):
         self.table = [LinkList() for i in range(self.N)]
 \end{lstlisting}
 
+\subsection{Hash Functions}
+For the hashing chaining, I choose the hash function to be 
+\begin{equation*}
+    h(k) = k \bmod N
+\end{equation*}
+
+The reason for doing so is to separate data as uniformly as possible and make sure that for a randomly generated key-val pair, it has the same likelihood to fall into each cell. So, theoretically, situations would not happen where some cell contains a linked list that is much longer than others.
+
 \subsection{Supported Functions}
 \subsubsection{Search}
 The idea of search is to first calculate the hash value of key, and use linked list search to check whether the key-value pair exists.
@@ -199,11 +207,11 @@ def search(self, key):
 \end{lstlisting}
 
 \subsubsection{Insert}
-The idea is to first locate the cell, and do a linked list set operation.
+The idea is to first locate the cell, and do a linked list insert operation.
 
 The running time of insert is in $O(1 + Len(H(k)))$.
 
-Notice that if too many elements have been added to the hash table, it is likely to have collisions, thus lowering the running speed. To avoid this case, we can calculate the load factor $\alpha$ when doing set, and choose to do rehashing accordingly. 
+Notice that if too many elements have been added to the hash table, it is likely to have collisions, thus lowering the running speed. To avoid this case, we can calculate the load factor $\alpha$ when doing insert, and choose to do rehashing accordingly. 
 It is common and proved to be efficient to limit $\alpha$ within the range $[\frac{1}{4}, \frac{3}{4}]$. This feature is supported in the codes I submit in the zip file, and I would omit the description here to avoid being too tedious.
 \begin{lstlisting}[language=Python]
 def insert(self, key, val):
@@ -219,7 +227,7 @@ def insert(self, key, val):
 \end{lstlisting}
 
 \subsubsection{Remove}
-The idea is to first locate the cell, and do a linked list set operation.
+The idea is to first locate the cell, and do a linked list insert operation.
 
 The running time of remove is in $O(1 + Len(H(k)))$.
 \begin{lstlisting}[language=Python]
@@ -236,7 +244,7 @@ def remove(self, key):
 \end{lstlisting}
 
 \subsubsection{Rehash}
-When doing set or delete operation, it is possible that the load factor becomes too large or too small. A large load factor indicates that there will be many collisions and a small load factor indicates that the space efficiency is low. Therefore, in this case, we need to do a rehash, namely, when $\alpha \leq 0.25$ or $\alpha \geq 0.75$.
+When doing insert or remove operation, it is possible that the load factor becomes too large or too small. A large load factor indicates that there will be many collisions and a small load factor indicates that the space efficiency is low. Therefore, in this case, we need to do a rehash, namely, when $\alpha \leq 0.25$ or $\alpha \geq 0.75$.
 
 The running time is in $O(N\cdot\max(Len(H(k))))$.
 \begin{lstlisting}[language=Python]
@@ -266,42 +274,52 @@ To formulate, for a pair p, the expected running time is:
 \end{align*}
 
 \subsection{Test Cases}
+\subsubsection{Generate Procedure}
+I wrote a generate\_testcase function in main.py, which can randomly generate numbers in the range within 0 and 100 to act as the parameter key and val. I make the load factor in the range of $0.05$ to $0.95$ with step length of $0.05$, and calculate the corresponding number of records the input should contain.
+
+Once the test cases for one particular $\alpha$ are generated, I stored these records into the file that is dynamically generated, so that I can read these records and make sure these records will not change when I test the hashing algorithm. This is very important since when doing the performance test, we want to make sure that all outer environment is fully identical.
+
 \subsubsection{Correctness Test}
-When checking for correctness, I first generated 20 operations of set to store 20 pairs in the hash table.
+When checking for correctness, I first generated 20 operations of insert to store 20 pairs in the hash table.
 
 Then, I did 20 search operations. Within them, some search for non-existed pairs.
 
-Last, I did 10 delete operations. Within them, some delete non-existed pairs, and it will cause no effect.
+Last, I did 10 remove operations. Within them, some remove non-existed pairs, and it will cause no effect.
 
 So far, I have tested the functionality of hash chaining algorithm. But, more efforts should still be put on corner cases, which is repeated pairs and non-existed pairs.
 
-Therefore, I randomly generated a testcase containing 70 operations including Search, Set and Delete, each type containing multiple corner cases. All the tests are passed, indicating that there is no error inside the supported functions.
+Therefore, I randomly generated a testcase containing 70 operations including Search, insert and remove, each type containing multiple corner cases. All the tests are passed, indicating that there is no error inside the supported functions.
 
 \subsubsection{Efficiency Test}
 The load factor $\alpha$ is chosen from $0.05$ to $0.95$ with step length of $0.05$. Therefore, a total of $19$ records can be obtained, and that will be sufficient to obtain a linear relationship in the log-log plot.
 
-In practice, I generate test cases each containing $(\alpha\cdot N)$ key-value pairs, and do the set operation first, search second and delete last. The randomly generated test cases will be normally distributed on each cell. Therefore, there will not be too many or too few collisions, and the result obtained will be very similar to the theoretical case. 
+In practice, I generate test cases each containing $(\alpha\cdot N)$ key-value pairs, and do the insert operation. The randomly generated test cases will be normally distributed on each cell. Therefore, there will not be too many or too few collisions, and the result obtained will be very similar to the theoretical case. 
 
 After running tests, I collect $\alpha$ and running time to have a log-log plot. The reason of using log-log scale is that if we can find a linear relationship in a log-log plot, then it is very convenient to transform into a polynomial relationship. In normal sense, a polynomial relationship means high efficiency.
 
 You can view the test cases in project/testcase/insert/. The test result is shown below.
+
+In the efficiency test, I used the actual clock time. The reason for doing so is that when doing the performance test, actual clock time reflects the real situation of an algorithm. The running time is not only about the number of cells encountered, but also is related to the data structures. Therefore, it is more practical to use the clock time as the measure.
+
+When I obtain the test result, I compare it with amortized time rather than the worst case time. The reason for doing so is that when analyzing the performance of an algorithm, we would try to avoid the occurrence of worst case, and we put more emphasis on average performance. For example, the worst case happens when there are a huge number of collisions. However, this issue is fixed in the codes by doing rehash.  
 \begin{itemize}
     \item Insert\\
     Using the original data without applying a log log trick, the plot is shown below in Fig \ref{chain-origin}.
     \begin{figure}[!htb]
         \centering
-        \includegraphics[width=0.8\textwidth]{../output/fig/insert_original_chain.eps}
+        \includegraphics[width=0.6\textwidth]{../output/fig/insert_original_chain.eps}
         \caption{Hashing chaining (Insert).}
         \label{chain-origin}
     \end{figure}
+
     However, limited information can be obtained from Fig \ref{chain-origin}.
 
-    In order to have a linear relation, the x-axis is chosen to be $\log(\alpha)$ and the y-axis is chosen to be $\log(T)$, and the linear fitting is shown in Fig \ref{chain-set}.
+    In order to have a linear relation, the x-axis is chosen to be $\log(\alpha)$ and the y-axis is chosen to be $\log(T)$, and the linear fitting is shown in Fig \ref{chain-insert}.
     \begin{figure}[!htb]
         \centering
-        \includegraphics[width=0.8\textwidth]{../output/fig/insert_chain.eps}
+        \includegraphics[width=0.6\textwidth]{../output/fig/insert_chain.eps}
         \caption{Log-log plot for hashing chaining (Insert).}
-        \label{chain-set}
+        \label{chain-insert}
     \end{figure}
 
     I use the scipy.optimize.curve\_fit function in Python, and the result is:
@@ -336,6 +354,17 @@ class Cuckoo(object):
         elif func == 2:
             return floor(key / self.N) % self.N
 \end{lstlisting}
+
+\subsection{Hash Functions}
+For cuckoo hashing, there are two hash tables inside. I choose the two hash functions to
+\begin{align*}
+    h_1(k) &= k\bmod N\\
+    h_2(k) &= (k / N) \bmod N
+\end{align*}
+
+The reason for choosing the first hash function is to separate data as uniformly as possible so that for a randomly generated testcase, it has equal likelihood to be mapped into each cell. Otherwise, situations may happen where some cells are much more likelihood to be mapped to than others. In this case, lots of evictions have to be done, thus reducing the efficiency of the algorithm.
+
+The reason for choosing the second hash function is similar. My idea is to first convert the key into another value, and apply the same priniple as the first hash function.
 
 \subsection{Supported Functions}
 \subsubsection{Search}
@@ -382,7 +411,7 @@ def insert(self, key, val):
 \end{lstlisting}
 
 \subsubsection{Remove}
-The idea of delete is to check two hash tables in order whether the target cell has a pair. If so, delete the pair. In my code implementation, it is to make the cell return to its initial state. 
+The idea of remove is to check two hash tables in order whether the target cell has a pair. If so, remove the pair. In my code implementation, it is to make the cell return to its initial state. 
 
 Since it only requires to look up in two hash tables, the running time is in $O(1)$.
 \begin{lstlisting}[language=Python]
@@ -410,39 +439,46 @@ def rehash(self):
 \end{lstlisting}
 
 \subsection{Theoretical Analysis}
-For an arbitrary sequence of operations, it could contain multiple search, insert and delete. As I have included in the previous section, search, insert and delete all have $O(1)$ running time since the basic idea is to look up certain cells in two hash tables.
+For an arbitrary sequence of operations, it could contain multiple search, insert and remove. As I have included in the previous section, search, insert and remove all have $O(1)$ running time since the basic idea is to look up certain cells in two hash tables.
 
 Suppose a sequence contains $n$ operations, based on the previous analysis, the total running time of cuckoo hashing is in $O(n)$.
 
 Recall the definition of load factor $\alpha:=\frac{n}{N}$, hence $n=\alpha N$. Therefore, the running time can be rewritten as $O(\alpha N)$.
 \subsection{Test Cases}
+\subsubsection{Generate Procedure}
+I read the files that is generated in the hash chaining, and do the following test.
+
 \subsubsection{Correctness Test}
 When checking for correctness, I first generated 50 operations of insert to store 50 pairs in the two hash tables.
 
 Then, I did 25 search operations. Within them, some search for non-existed pairs.
 
-Last, I did 25 delete operations. Within them, some delete non-existed pairs, and it will cause no effect.
+Last, I did 25 remove operations. Within them, some remove non-existed pairs, and it will cause no effect.
 
 So far, I have tested the functionality of cuckoo hashing algorithm. I still need to test corner cases, which is repeated pairs and non-existed pairs.
 
-Therefore, I randomly generated a testcase containing 70 operations including Search, Set and Delete, each type containing multiple corner cases. All the tests are passed, indicating that there is no error inside the supported functions.
+Therefore, I randomly generated a testcase containing 70 operations including search, insert and remove, each type containing multiple corner cases. All the tests are passed, indicating that there is no error inside the supported functions.
 
 \subsubsection{Efficiency Test}
+In the efficiency test, I used the actual clock time. The reason for doing so is that when doing the performance test, actual clock time reflects the real situation of an algorithm. The running time is not only about the number of cells encountered, but also is related to the data structures. Therefore, it is more practical to use the clock time as the measure.
+
+The reason of choosing actual clock time and amortized time is explained in section 1.5.3.
 \begin{itemize}
-    \item Set\\
+    \item Insert\\
     Using the original data without applying a log log trick, the plot is shown below in Fig \ref{chain-origin}.
     \begin{figure}[!htb]
         \centering
-        \includegraphics[width=0.8\textwidth]{../output/fig/insert_original_cuckoo.eps}
+        \includegraphics[width=0.6\textwidth]{../output/fig/insert_original_cuckoo.eps}
         \caption{Cuckoo hashing (Insert).}
         \label{cuckoo-origin}
     \end{figure}
+
     However, limited information can be obtained from Fig \ref{cuckoo-origin}.
 
     In order to have a linear relation, the x-axis is chosen to be $\log(\alpha)$ and the y-axis is chosen to be $\log(T)$. I use the scipy.optimize.curve\_fit in Python to get the linear fitting as shown in Fig \ref{cuckoo-insert}. The result is:
     \begin{figure}[!htb]
         \centering
-        \includegraphics[width=0.8\textwidth]{../output/fig/insert_cuckoo.eps}
+        \includegraphics[width=0.6\textwidth]{../output/fig/insert_cuckoo.eps}
         \caption{Log-log plot for cuckoo hashing (Insert).}
         \label{cuckoo-insert}
     \end{figure}
@@ -457,21 +493,6 @@ Therefore, I randomly generated a testcase containing 70 operations including Se
     
     Recall that the expected running time is in $O(\alpha N)$, which is a first order polynomial of $\alpha$, the result is close and thus makes sense.
 \end{itemize}
-
-\section{Comparative Analysis}
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\textwidth]{../output/fig/insert_original.eps}
-    \caption{Hashing (Insert).}
-    \label{insert-origin}
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\textwidth]{../output/fig/insert.eps}
-    \caption{Log-log plot for both hashing (Insert).}
-    \label{insert}
-\end{figure}
 
 \end{spacing}
 \end{document}
