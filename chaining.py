@@ -6,6 +6,7 @@ class Chaining(object):
         self.N = 373
         self.alpha = 0
         self.cnt = 0
+        self.n_encountered = 0
         self.table = [LinkList() for i in range(self.N)]
 
     def hash(self, key):
@@ -18,7 +19,8 @@ class Chaining(object):
     def insert(self, key, val):
         k = self.hash(key)
         isExisted = (self.table[k].search(key) != -1)
-        self.table[k].insert(key, val)
+        node, cnt = self.table[k].insert(key, val)
+        self.n_encountered += cnt
         if not isExisted:
             self.cnt += 1
             self.alpha = self.cnt / self.N

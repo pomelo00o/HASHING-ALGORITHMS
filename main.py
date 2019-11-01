@@ -1,15 +1,19 @@
 from chaining import *
 from cuckoo import *
 from random import *
-from time import *
 
+# 'chain' or 'cuckoo'
 hashmap = "chain"
+
 
 class Command(object):
     def __init__(self, action, key, val):
         self.action = action
         self.key = key
         self.val = val
+
+
+to_insert = Command('i', floor(random() * 100), floor(random() * 100))
 
 
 def generate_testcase(n):
@@ -36,7 +40,6 @@ if __name__ == '__main__':
             continue
         # generate_testcase(n)
         filename = './testcase/insert/' + hashmap + '/test_' + str(n) + '.csv'
-        start = time()
         c = Chaining()
         with open(filename, 'r') as f:
             lines = f.readlines()
@@ -52,8 +55,8 @@ if __name__ == '__main__':
                 c.search(key)
             elif info[0] == 'r':
                 c.remove(key)
-        end = time()
-        line = str(alpha) + ',' + str(end - start)
+        c.insert(to_insert.key, to_insert.val)
+        line = str(alpha) + ',' + str(c.n_encountered)
         with open(outfile, 'a') as f:
             f.write(line)
             f.write('\n')

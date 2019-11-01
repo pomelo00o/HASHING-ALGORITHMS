@@ -18,7 +18,7 @@ with open("./insert/chain.csv", "r") as chainFile:
 
     for item in chainReader:
         alpha_chain.append(log(float(item[0])))
-        time_chain.append(log(float(item[1]) * 10e6, 2))
+        time_chain.append(log(float(item[1]), 2))
 
 chainFile.close()
 
@@ -27,7 +27,7 @@ with open("./insert/cuckoo.csv", "r") as cuckooFile:
 
     for item in cuckooReader:
         alpha_cuckoo.append(log(float(item[0])))
-        time_cuckoo.append(log(float(item[1]) * 10e6, 2))
+        time_cuckoo.append(log(float(item[1]), 2))
 
 cuckooFile.close()
 
@@ -38,8 +38,8 @@ plt.scatter(alpha_chain, time_chain, marker = '^')
 plt.scatter(alpha_cuckoo, time_cuckoo, marker = '+')
 
 plt.xlabel('Log(alpha)')
-plt.ylabel('Log(t)')
-plt.title('Time vs Load Factor')
+plt.ylabel('Log(n)')
+plt.title('Num of Keys Encountered vs Load Factor')
 plt.legend(['Chaining', 'Cuckoo'], loc = 'upper left')
 
 A1, B1 = optimize.curve_fit(func, alpha_chain, time_chain)[0]

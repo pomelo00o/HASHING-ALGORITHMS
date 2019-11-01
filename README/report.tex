@@ -279,6 +279,8 @@ I wrote a generate\_testcase function in main.py, which can randomly generate nu
 
 Once the test cases for one particular $\alpha$ are generated, I stored these records into the file that is dynamically generated, so that I can read these records and make sure these records will not change when I test the hashing algorithm. This is very important since when doing the performance test, we want to make sure that all outer environment is fully identical.
 
+However, it should be noticed that I am not recording the time or number of keys encountered when inserting these pairs. Instead, I am recording the number of keys encountered of adding one extra pair when these pairs are already inside the hash table. 
+
 \subsubsection{Correctness Test}
 When checking for correctness, I first generated 20 operations of insert to store 20 pairs in the hash table.
 
@@ -291,17 +293,15 @@ So far, I have tested the functionality of hash chaining algorithm. But, more ef
 Therefore, I randomly generated a testcase containing 70 operations including Search, insert and remove, each type containing multiple corner cases. All the tests are passed, indicating that there is no error inside the supported functions.
 
 \subsubsection{Efficiency Test}
-The load factor $\alpha$ is chosen from $0.05$ to $0.95$ with step length of $0.05$. Therefore, a total of $19$ records can be obtained, and that will be sufficient to obtain a linear relationship in the log-log plot.
-
 In practice, I generate test cases each containing $(\alpha\cdot N)$ key-value pairs, and do the insert operation. The randomly generated test cases will be normally distributed on each cell. Therefore, there will not be too many or too few collisions, and the result obtained will be very similar to the theoretical case. 
+
+In the efficiency test, I used the number of keys accesssed. The reason for doing so is that when doing the performance test, actual clock time is easily affected by many factors, such as the choice of data structures, the performance of CPU and so on. However, if we count the number of accessed keys, the result will always remain constant no matter how the environment changes.
 
 After running tests, I collect $\alpha$ and running time to have a log-log plot. The reason of using log-log scale is that if we can find a linear relationship in a log-log plot, then it is very convenient to transform into a polynomial relationship. In normal sense, a polynomial relationship means high efficiency.
 
-You can view the test cases in project/testcase/insert/. The test result is shown below.
-
-In the efficiency test, I used the actual clock time. The reason for doing so is that when doing the performance test, actual clock time reflects the real situation of an algorithm. The running time is not only about the number of cells encountered, but also is related to the data structures. Therefore, it is more practical to use the clock time as the measure.
-
 When I obtain the test result, I compare it with amortized time rather than the worst case time. The reason for doing so is that when analyzing the performance of an algorithm, we would try to avoid the occurrence of worst case, and we put more emphasis on average performance. For example, the worst case happens when there are a huge number of collisions. However, this issue is fixed in the codes by doing rehash.  
+
+You can view the test cases in project/testcase/insert/. The test result is shown below.
 \begin{itemize}
     \item Insert\\
     Using the original data without applying a log log trick, the plot is shown below in Fig \ref{chain-origin}.
@@ -324,14 +324,14 @@ When I obtain the test result, I compare it with amortized time rather than the 
 
     I use the scipy.optimize.curve\_fit function in Python, and the result is:
     \begin{equation*}
-        \log(T) = 0.945 \cdot \log(\alpha) + 14.974
+        \log(n) = 2.720 \cdot \log(\alpha) + 8.436
     \end{equation*}
     which can be further simplify to polynomial form:
     \begin{equation*}
-        T = \alpha^{0.945}\cdot 2^{14.974}
+        n = \alpha^{2.720}\cdot 2^{8.436}
     \end{equation*}
 
-    Recall that the expected running time is in $O(1+\alpha)$, which is a first order polynomial of $\alpha$, the result is close and thus makes sense.
+    Hence, the number of accessed keys are a polynomial function of $\alpha$.
 \end{itemize}
 
 \section{Cuckoo Hashing}
@@ -446,8 +446,9 @@ Suppose a sequence contains $n$ operations, based on the previous analysis, the 
 Recall the definition of load factor $\alpha:=\frac{n}{N}$, hence $n=\alpha N$. Therefore, the running time can be rewritten as $O(\alpha N)$.
 \subsection{Test Cases}
 \subsubsection{Generate Procedure}
-I read the files that is generated in the hash chaining, and do the following test.
+I read the files that is generated in the hash chaining, and insert those pairs into the cuckoo hash table. Then, I will insert one extra pair and record its corresponding number of keys accessed.
 
+You may refer to section 1.5.1 for more information. The testcases and operation are the same.
 \subsubsection{Correctness Test}
 When checking for correctness, I first generated 50 operations of insert to store 50 pairs in the two hash tables.
 
@@ -460,9 +461,15 @@ So far, I have tested the functionality of cuckoo hashing algorithm. I still nee
 Therefore, I randomly generated a testcase containing 70 operations including search, insert and remove, each type containing multiple corner cases. All the tests are passed, indicating that there is no error inside the supported functions.
 
 \subsubsection{Efficiency Test}
-In the efficiency test, I used the actual clock time. The reason for doing so is that when doing the performance test, actual clock time reflects the real situation of an algorithm. The running time is not only about the number of cells encountered, but also is related to the data structures. Therefore, it is more practical to use the clock time as the measure.
+In practice, I generate test cases each containing $(\alpha\cdot N)$ key-value pairs, and do the insert operation. The randomly generated test cases will be normally distributed on each cell. Therefore, there will not be too many or too few collisions, and the result obtained will be very similar to the theoretical case. 
 
-The reason of choosing actual clock time and amortized time is explained in section 1.5.3.
+In the efficiency test, I used the number of keys accesssed. The reason for doing so is that when doing the performance test, actual clock time is easily affected by many factors, such as the choice of data structures, the performance of CPU and so on. However, if we count the number of accessed keys, the result will always remain constant no matter how the environment changes.
+
+After running tests, I collect $\alpha$ and running time to have a log-log plot. The reason of using log-log scale is that if we can find a linear relationship in a log-log plot, then it is very convenient to transform into a polynomial relationship. In normal sense, a polynomial relationship means high efficiency.
+
+When I obtain the test result, I compare it with amortized time rather than the worst case time. The reason for doing so is that when analyzing the performance of an algorithm, we would try to avoid the occurrence of worst case, and we put more emphasis on average performance. For example, the worst case happens when there are a huge number of collisions. However, this issue is fixed in the codes by doing rehash.  
+
+You can view the test cases in project/testcase/insert/. The test result is shown below.
 \begin{itemize}
     \item Insert\\
     Using the original data without applying a log log trick, the plot is shown below in Fig \ref{chain-origin}.
@@ -484,15 +491,27 @@ The reason of choosing actual clock time and amortized time is explained in sect
     \end{figure}
     
     \begin{equation*}
-        \log(T) = 0.894 \cdot \log(\alpha) + 15.332
+        \log(n) = 2.231 \cdot \log(\alpha) + 9.583
     \end{equation*}
     which can be further simplify to polynomial form:
     \begin{equation*}
-        T = \alpha^{0.894}\cdot 2^{15.332}
+        n = \alpha^{2.231}\cdot 2^{9.583}
     \end{equation*}
-    
-    Recall that the expected running time is in $O(\alpha N)$, which is a first order polynomial of $\alpha$, the result is close and thus makes sense.
-\end{itemize}
 
+    Hence, the number of accessed keys are a polynomial function of $\alpha$.
+\end{itemize}
+\section{Comparative Analysis}
+If we combine two log-log plot together as in Fig \ref{insert}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../output/fig/insert.eps}
+    \caption{Log-log plot for both hashing algorithms(Insert).}
+    \label{insert}
+\end{figure}
+
+we can see that hash chaining has a lower number of accessed keys than cuckoo hashing. However, hash chaining has a larger slope, which indicates it is more likely to be affected by collisions.
+
+Therefore, we can get the conclusion that if we are storing a limited number of elements, hash chaining has a better performance than cuckoo hashing. However, if the size of the stored data is huge, we may consider to use cuckoo hashing to avoid collisions.
 \end{spacing}
 \end{document}

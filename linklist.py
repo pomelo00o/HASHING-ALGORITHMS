@@ -17,11 +17,13 @@ class LinkList(object):
         return -1
 
     def insert(self, key, val):
+        cnt = 0
         dummy = ListNode(-1, -1)
         curr = dummy
         curr.next = self.head
         isExisted = False
         while curr.next:
+            cnt += 1
             if curr.next.kv.key == key:
                 curr.next.kv.val = val
                 isExisted = True
@@ -32,7 +34,7 @@ class LinkList(object):
             node = ListNode(key, val)
             curr.next = node
         self.head = dummy.next
-        return dummy.next
+        return dummy.next, cnt
 
     def remove(self, key):
         dummy = ListNode(-1, -1)

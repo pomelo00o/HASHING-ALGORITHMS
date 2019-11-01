@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.2.28)  31 OCT 2019 21:46
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.2.28)  1 NOV 2019 01:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -242,20 +242,20 @@ File: ../output/fig/insert_chain.eps Graphic file (type eps)
  [8] [9] [10]
 File: ../output/fig/insert_original_cuckoo.eps Graphic file (type eps)
 <../output/fig/insert_original_cuckoo.eps>
+ [11]
 File: ../output/fig/insert_cuckoo.eps Graphic file (type eps)
 <../output/fig/insert_cuckoo.eps>
- [11] [12] (./report.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+ [12]
+File: ../output/fig/insert.eps Graphic file (type eps)
+<../output/fig/insert.eps>
+ [13] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 3717 strings out of 494476
- 50827 string characters out of 6165662
+ 3720 strings out of 494476
+ 50900 string characters out of 6165662
  362462 words of memory out of 5000000
- 7591 multiletter control sequences out of 15000+600000
+ 7594 multiletter control sequences out of 15000+600000
  6463 words of font info for 36 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  27i,10n,49p,477b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (12 pages).
+Output written on report.pdf (13 pages).
